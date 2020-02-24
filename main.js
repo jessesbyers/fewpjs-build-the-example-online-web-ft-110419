@@ -2,7 +2,29 @@
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
+
+
 // Your JavaScript code goes here!
+document.getElementById("modal").className = "hidden"
+
+let likeButtons = document.querySelectorAll("li.like")
+likeButtons.forEach(likeButton => {
+  likeButton.addEventListener('click', function() {
+    let heart = likeButton.querySelector("span")
+    if (heart.innerHTML === FULL_HEART) {
+      heart.innerHTML = EMPTY_HEART
+    } else if (heart.innerHTML === EMPTY_HEART) {
+      heart.innerHTML = FULL_HEART
+    }
+  })
+})
+
+
+
+
+
+
+
 
 
 
