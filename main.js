@@ -3,29 +3,34 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 
-
-// Your JavaScript code goes here!
-document.getElementById("modal").className = "hidden"
+let modal = document.getElementById("modal")
+modal.className = "hidden"
 
 let likeButtons = document.querySelectorAll("li.like")
 likeButtons.forEach(likeButton => {
   likeButton.addEventListener('click', function() {
-    let heart = likeButton.querySelector("span")
-    if (heart.innerHTML === FULL_HEART) {
-      heart.innerHTML = EMPTY_HEART
-    } else if (heart.innerHTML === EMPTY_HEART) {
-      heart.innerHTML = FULL_HEART
-    }
+    mimicServerCall(url="http://mimicServer.example.com", config={})
+    .then(function(response) {
+      return response;
+    })
+    .then(function(json) {
+      let heart = likeButton.querySelector("span")
+      if (heart.innerHTML === FULL_HEART) {
+        heart.innerHTML = EMPTY_HEART
+        heart.className = ""
+
+      } else if (heart.innerHTML === EMPTY_HEART) {
+        heart.innerHTML = FULL_HEART
+        heart.className = "activated-heart"
+      }
+    })
+    .catch(function(error) {
+      modal.className = ""
+      modal.innerText = `ERROR: ${error.message}`
+      setTimeout(function(){ modal.className = "hidden" }, 5000);
+    });
   })
 })
-
-
-
-
-
-
-
-
 
 
 
